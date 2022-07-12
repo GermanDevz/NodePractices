@@ -8,6 +8,11 @@ const options = [{
 },{
     value: 2,
     name: `${('2.').green} Ver historial`
+},
+{
+    value: 0,
+    name:  `${('0.').green} Salir`
+
 }];
 
 
@@ -53,19 +58,19 @@ const leerInput = async( message ) => {
     const question = [
         {
             type: 'input',
-            name: 'desc',
+            name: 'city',
             message,
             validate( value ) {
                 if( value.length === 0 ) {
-                    return 'Por favor ingrese un valor';
+                    return 'Please, insert a valid value';
                 }
                 return true;
             }
         }
     ];
 
-    const { desc } = await inquirer.prompt(question);
-    return desc;
+    const { city } = await inquirer.prompt(question);
+    return city;
 }
 
 const listadoTareasBorrar = async( tareas = [] ) => {
