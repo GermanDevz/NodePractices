@@ -1,0 +1,18 @@
+{
+    "name": "api",
+    "version": "0.0.1",
+    "description": "Practicas de node. Api para consultar el clima e informacion general sobre lugares",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "nodejs"
+    ],
+    "author": "German Velardez",
+    "license": "MIT",
+    "dependencies": {
+        "colors": "^1.4.0",
+        "inquirer": "8.0"
+    }
+}
