@@ -4,8 +4,8 @@ const Search = require('./models/search');
 
 
 const main = async()=>{
-    let opt
 
+    let opt
     let endComand = false
     const search = new Search()
 
@@ -18,10 +18,31 @@ const main = async()=>{
 
         case 0:
             endComand = true;
-            console.log(`fin del programa \n`);
+            console.log(`End program \n`);
+            break;
         case 1:
-            let city = await leerInput();
-            await search.getCity(city)
+            let movieName = await leerInput('Movie');
+            
+            const movieList = await search.getMovieList(movieName)
+            console.clear();
+           
+            console.log("================================================================================================\n")
+            console.log(`\nResults found: ${movieList.length}\n`)
+            movieList.forEach(movie => {
+                console.log(`
+            
+                title: ${movie.title.green}
+                id: ${(movie.id+"").blue}
+                overview: ${movie.overview.gray}
+        \n`);
+                
+            });
+           
+            console.log("================================================================================================\n");
+
+            await  pause();
+            
+
             break
         case 2:
             search.getHistory(); 

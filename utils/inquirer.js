@@ -4,14 +4,14 @@ require('colors');
 
 const options = [{
     value: 1,
-    name: `${('1.').green} Buscar ciudad`
+    name: `${('1.').green} Search a movie`
 },{
     value: 2,
-    name: `${('2.').green} Ver historial`
+    name: `${('2.').green} Show history`
 },
 {
     value: 0,
-    name:  `${('0.').green} Salir`
+    name:  `${('0.').green} Exit`
 
 }];
 
@@ -31,7 +31,7 @@ const menu = async() => {
 
     console.clear();
     console.log('=========================='.green);
-    console.log('  Seleccione una opción'.white );
+    console.log(' The movie data base Api in console'.white );
     console.log('==========================\n'.green);
 
     const {option}  = await inquirer.prompt(menuOptions);
@@ -58,7 +58,7 @@ const leerInput = async( message ) => {
     const question = [
         {
             type: 'input',
-            name: 'city',
+            name: 'movie',
             message,
             validate( value ) {
                 if( value.length === 0 ) {
@@ -69,8 +69,8 @@ const leerInput = async( message ) => {
         }
     ];
 
-    const { city } = await inquirer.prompt(question);
-    return city;
+    const { movie } = await inquirer.prompt(question);
+    return movie;
 }
 
 const listadoTareasBorrar = async( tareas = [] ) => {
