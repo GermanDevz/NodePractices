@@ -1,4 +1,4 @@
-const {menu, pause, leerInput} = require('./utils/inquirer')
+const {menu, pause, leerInput, listData} = require('./utils/inquirer')
 const Search = require('./models/search');
 
 
@@ -21,28 +21,49 @@ const main = async()=>{
             console.log(`End program \n`);
             break;
         case 1:
-            let movieName = await leerInput('Movie');
+
+            try {
+                let movieName = await leerInput('Movie');
             
             const movieList = await search.getMovieList(movieName)
             console.clear();
            
             console.log("================================================================================================\n")
             console.log(`\nResults found: ${movieList.length}\n`)
-            movieList.forEach(movie => {
-                console.log(`
-            
-                title: ${movie.title.green}
-                id: ${(movie.id+"").blue}
-                overview: ${movie.overview.gray}
-        \n`);
-                
-            });
-           
+           const movieId =  await listData(movieList);
+
+           //
             console.log("================================================================================================\n");
-
             await  pause();
-            console.clear();
+            if(movieList.length !== 0){
+                console.clear();
+                const info = await search.getMovieWithId(movieId);
+                 if(info){
+                     console.clear();
+                     console.log(`Title: ${info.title.bold}
+                     Date: ${info.date.blue}
+                     Popularity: ${(info.popularity+"").yellow} 
+                     Budge: ${("$"+info.budget).green}
+                     Sipnosis: 
+                     ${info.description.bold}`.bgGray)
+                     
+                 }
+                 else{
+                     console.log('Error: Movie without details\n');
+                 }
+                 await pause();
 
+            }
+                
+            } catch (error) {
+                
+                await pause();
+                console.log('critical error \n');
+                
+            }
+
+            
+           
             
 
             break

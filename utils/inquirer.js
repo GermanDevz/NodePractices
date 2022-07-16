@@ -45,7 +45,7 @@ const pause = async() => {
         {
             type: 'input',
             name: 'enter',
-            message: `Presione ${ 'enter'.green } para continuar`
+            message: `Press ${ 'enter'.green } to continue `
         }
     ];
 
@@ -73,35 +73,35 @@ const leerInput = async( message ) => {
     return movie;
 }
 
-const listadoTareasBorrar = async( tareas = [] ) => {
-
-    const choices = tareas.map( (tarea, i) => {
-
-        const idx = `${i + 1}.`.green;
-
+const listData = async(data = [])=>{
+    const choices = data.map( (d,i)=>{
+        const idx = `${i+1}.`.green;
         return {
-            value: tarea.id,
-            name:  `${ idx } ${ tarea.desc }`
+            value : d.id,
+            name: `${idx } ${(d.title+" ").inverse} (${d.date.bold})
+                  `
         }
     });
 
+    // add cancel option
     choices.unshift({
         value: '0',
-        name: '0.'.green + ' Cancelar'
+        name: `(x)CANCEL`.bold.red
     });
-
-    const preguntas = [
+    const question = [
         {
             type: 'list',
             name: 'id',
-            message: 'Borrar',
+            message: 'Results',
             choices
         }
     ]
 
-    const { id } = await inquirer.prompt(preguntas);
+    const { id } = await inquirer.prompt(question);
     return id;
 }
+
+
 
 const confirmar = async(message) => {
 
@@ -146,10 +146,10 @@ const mostrarListadoChecklist = async( tareas = [] ) => {
 
 
 module.exports = {
+    listData,
     menu,
     pause,
     leerInput,
-    listadoTareasBorrar,
     confirmar,
     mostrarListadoChecklist
 }
